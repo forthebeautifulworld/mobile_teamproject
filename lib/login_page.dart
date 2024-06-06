@@ -39,10 +39,6 @@ class LoginPageState extends State<LoginPage> {
       );
     } else {
       // 사용자 정보가 없을 때 빈 맵 전달
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage(userInfo: {})),
-      );
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Invalid email or password")),
       );
