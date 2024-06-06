@@ -18,15 +18,24 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'user_database.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) {
+        // "users" 테이블 생성
         db.execute(
           "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birth TEXT, userId TEXT, password TEXT)",
         );
-        // 새로운 테이블 생성
+        // "stores" 테이블 생성
         db.execute(
-          "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice TEXT, menuFile TEXT, layoutFile TEXT, maxCapacity TEXT, storeFeatures TEXT)",
+          "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice INTEGER, menuFile TEXT, layoutFile TEXT, maxCapacity INTEGER, storeFeatures TEXT)",
         );
+      },
+      onUpgrade: (db, oldVersion, newVersion) {
+        if (oldVersion < 2) {
+          // "stores" 테이블 생성 쿼리 실행
+          db.execute(
+            "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice INTEGER, menuFile TEXT, layoutFile TEXT, maxCapacity INTEGER, storeFeatures TEXT)",
+          );
+        }
       },
     );
   }

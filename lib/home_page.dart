@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'store_search_page.dart';
 import 'store_register_page.dart';
+import 'store_list_page.dart';
 
 class HomePage extends StatefulWidget {
   final Map<String, dynamic> userInfo; // 사용자 정보를 저장할 Map
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,10 +137,43 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const StoreListPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      padding: const EdgeInsets.symmetric(vertical: 30),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 60),
+                          child: Text(
+                            "매장 목록",
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 60),
+                          child: Icon(
+                            Icons.list,
+                            color: Colors.white,
+                            size: 80,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-
             // 추가된 부분 종료
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -219,7 +253,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 storeName,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(description),
             ],

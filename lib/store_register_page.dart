@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // image_picker 플러그인 임포트
 import 'home_page.dart';
+import 'database_helper.dart';
+import 'store_list_page.dart';
 
 class StoreRegisterPage extends StatefulWidget {
   const StoreRegisterPage({super.key});
@@ -25,7 +27,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
   File? menuFile;
   File? layoutFile;
 
-  String profileImage = 'assets/images/default_profile.jpg';
+  String profileImage = 'assets/images/default_profile.jpeg';
 
   void updateProfileImage() {
     setState(() {
@@ -53,16 +55,16 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
     }
   }
 
-  void registerStore() {
+  void registerStore() async {
     String storeName = storeNameController.text;
     String ownerName = ownerNameController.text;
     String storeLocation = storeLocationController.text;
-    String storePhone = storePhoneController.text;
-    String businessNumber = businessNumberController.text;
-    String ownerPhone = ownerPhoneController.text;
+    String storePhone = storePhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String businessNumber = businessNumberController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String ownerPhone = ownerPhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
     String storeType = storeTypeController.text;
-    String avgPrice = avgPriceController.text;
-    String maxCapacity = maxCapacityController.text;
+    String avgPrice = avgPriceController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String maxCapacity = maxCapacityController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
     String storeFeatures = storeFeaturesController.text;
 
     if (storeName.isEmpty ||
@@ -77,11 +79,29 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
         storeFeatures.isEmpty) {
       _showError("모든 필드를 채워 주세요.");
     } else {
-      // 모든 입력이 완료된 경우, DB에 저장하는 부분 구현 필요
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
-      );
+      Map<String, dynamic> store = {
+        'storeName': storeName,
+        'ownerName': ownerName,
+        'storeLocation': storeLocation,
+        'storePhone': storePhone,
+        'businessNumber': businessNumber,
+        'ownerPhone': ownerPhone,
+        'storeType': storeType,
+        'avgPrice': int.parse(avgPrice),
+        'maxCapacity': int.parse(maxCapacity),
+        'storeFeatures': storeFeatures,
+      };
+
+      try {
+        await DatabaseHelper().insertStore(store);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+        );
+      } catch (e) {
+        print('Error: $e');
+        _showError("매장 등록에 실패했습니다. 다시 시도해 주세요.");
+      }
     }
   }
 
