@@ -1,4 +1,3 @@
-//home_page.dart
 import 'package:flutter/material.dart';
 import 'store_search_page.dart';
 import 'store_register_page.dart';
@@ -9,10 +8,9 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.userInfo});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
-
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,7 +217,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 storeName,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(description),
             ],

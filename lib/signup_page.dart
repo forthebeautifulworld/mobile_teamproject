@@ -1,4 +1,3 @@
-//signup_page.dart
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'database_helper.dart'; // Import the database helper class
@@ -48,11 +47,13 @@ class SignupPageState extends State<SignupPage> {
       await DatabaseHelper().insertUser(user);
 
       // Navigate to the login page or show success message
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     } catch (e) {
+      if (!mounted) return;
       _showErrorDialog('Failed to sign up. Please try again.');
     }
   }

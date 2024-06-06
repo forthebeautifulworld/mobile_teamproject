@@ -1,4 +1,3 @@
-//store_search_page.dart
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 
@@ -18,7 +17,7 @@ class StoreSearchPage extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              'assets/images/map.png', // 吏��룄 �씠誘몄�� �뙆�씪 寃쎈줈
+              'assets/images/map.png', // 지도 이미지 파일 경로
               fit: BoxFit.cover,
               width: double.infinity,
             ),
@@ -41,10 +40,10 @@ class StoreSearchPage extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+              MaterialPageRoute(builder: (context) => const HomePage(userInfo: {})),
             );
           } else if (index == 1) {
-            // My Info �럹�씠吏�濡� �씠�룞
+            // My Info 페이지로 이동
             // Navigator.push(
             //   context,
             //   MaterialPageRoute(builder: (context) => const MyInfoPage()),
