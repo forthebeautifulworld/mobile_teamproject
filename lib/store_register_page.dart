@@ -1,3 +1,4 @@
+//store_register_page.dart
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // image_picker 플러그인 임포트
@@ -17,7 +18,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
   final TextEditingController ownerNameController = TextEditingController();
   final TextEditingController storeLocationController = TextEditingController();
   final TextEditingController storePhoneController = TextEditingController();
-  final TextEditingController businessNumberController = TextEditingController();
+  final TextEditingController businessNumberController =
+      TextEditingController();
   final TextEditingController ownerPhoneController = TextEditingController();
   final TextEditingController storeTypeController = TextEditingController();
   final TextEditingController avgPriceController = TextEditingController();
@@ -58,7 +60,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
 
   Future<void> pickMenuFile() async {
     final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         menuFile = File(pickedFile.path);
@@ -68,7 +70,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
 
   Future<void> pickLayoutFile() async {
     final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         layoutFile = File(pickedFile.path);
@@ -186,7 +188,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                   const Text(
                     "매장 정보",
                     style:
-                    TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
@@ -268,8 +270,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                     onChanged: (text) {
                       avgPriceController.value = TextEditingValue(
                         text: formatCurrency(text),
-                        selection:
-                        TextSelection.collapsed(offset: formatCurrency(text).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCurrency(text).length),
                       );
                     },
                     decoration: const InputDecoration(
@@ -281,7 +283,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                   GestureDetector(
                     onTap: pickMenuFile,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 16),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(4),
@@ -292,7 +295,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                           const Text('메뉴 파일 첨부'),
                           menuFile != null
                               ? const Icon(Icons.check, color: Colors.green)
-                              : const Icon(Icons.upload_file, color: Colors.grey),
+                              : const Icon(Icons.upload_file,
+                                  color: Colors.grey),
                         ],
                       ),
                     ),
@@ -301,7 +305,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                   GestureDetector(
                     onTap: pickLayoutFile,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 16),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(4),
@@ -312,7 +317,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                           const Text('레이아웃 파일 첨부'),
                           layoutFile != null
                               ? const Icon(Icons.check, color: Colors.green)
-                              : const Icon(Icons.upload_file, color: Colors.grey),
+                              : const Icon(Icons.upload_file,
+                                  color: Colors.grey),
                         ],
                       ),
                     ),
@@ -324,8 +330,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                     onChanged: (text) {
                       maxCapacityController.value = TextEditingValue(
                         text: formatCapacity(text),
-                        selection:
-                        TextSelection.collapsed(offset: formatCapacity(text).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCapacity(text).length),
                       );
                     },
                     decoration: const InputDecoration(
@@ -349,7 +355,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+                            MaterialPageRoute(
+                                builder: (context) => HomePage(userInfo: {})),
                           );
                         },
                         style: ElevatedButton.styleFrom(

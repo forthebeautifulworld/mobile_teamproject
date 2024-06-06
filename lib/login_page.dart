@@ -1,3 +1,4 @@
+// login_page.dart
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'signup_page.dart'; // 회원가입 페이지로 이동하도록 import 추가
@@ -15,7 +16,7 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void signIn() async {
-    // 여기에 실제 로그인 로직을 추가하세요 (ex. Firebase Auth)
+    // 여기에 실제 로그인 로직을 추가하세요 (예: Firebase Auth)
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -24,11 +25,14 @@ class LoginPageState extends State<LoginPage> {
 
     // 입력한 email과 password가 데이터베이스에 존재하는지 확인합니다.
     Map<String, dynamic>? user = users.firstWhere(
-          (user) => user['userId'] == email && user['password'] == password,
+      (user) => user['userId'] == email && user['password'] == password,
       orElse: () => {}, // 빈 맵 반환
     );
 
-    if (user != null) {
+    // 'BuildContext'의 사용 전에 'mounted' 확인을 추가하여 비동기 작업 중 사용을 방지합니다.
+    if (!mounted) return;
+
+    if (user.isNotEmpty) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage(userInfo: user)),
@@ -37,7 +41,7 @@ class LoginPageState extends State<LoginPage> {
       // 사용자 정보가 없을 때 빈 맵 전달
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+        MaterialPageRoute(builder: (context) => const HomePage(userInfo: {})),
       );
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Invalid email or password")),
@@ -68,7 +72,7 @@ class LoginPageState extends State<LoginPage> {
                   const Text(
                     "Login",
                     style:
-                    TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
@@ -140,5 +144,3 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

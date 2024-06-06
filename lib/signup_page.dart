@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'database_helper.dart';  // Import the database helper class
-import 'users_page.dart';  // Import the users page class
+import 'database_helper.dart'; // Import the database helper class
+import 'users_page.dart'; // Import the users page class
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -47,11 +47,13 @@ class SignupPageState extends State<SignupPage> {
       await DatabaseHelper().insertUser(user);
 
       // Navigate to the login page or show success message
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     } catch (e) {
+      if (!mounted) return;
       _showErrorDialog('Failed to sign up. Please try again.');
     }
   }

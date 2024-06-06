@@ -1,4 +1,3 @@
-//home_page.dart
 import 'package:flutter/material.dart';
 import 'store_search_page.dart';
 import 'store_register_page.dart';
@@ -10,10 +9,9 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.userInfo});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
-
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,3 +1,4 @@
+//whale_pizza.dart
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class RestaurantPage extends StatefulWidget {
   _RestaurantPageState createState() => _RestaurantPageState();
 }
 
-class _RestaurantPageState extends State<RestaurantPage> with SingleTickerProviderStateMixin {
+class _RestaurantPageState extends State<RestaurantPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -38,7 +40,8 @@ class _RestaurantPageState extends State<RestaurantPage> with SingleTickerProvid
         appBar: AppBar(
           title: Container(),
           leading: IconButton(
-            icon: Image.asset('assets/images/back_button.png'), // 뒤로가기 버튼 이미지 경로
+            icon:
+                Image.asset('assets/images/back_button.png'), // 뒤로가기 버튼 이미지 경로
             onPressed: () {
               // 뒤로가기 기능 구현
             },
@@ -89,14 +92,14 @@ class _RestaurantPageState extends State<RestaurantPage> with SingleTickerProvid
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: _tabController.index == 0
             ? ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ReservationPage()),
-            );
-          },
-          child: Text('예약하기'),
-        )
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReservationPage()),
+                  );
+                },
+                child: Text('예약하기'),
+              )
             : null,
       ),
     );
@@ -183,7 +186,8 @@ class _MenuItemState extends State<MenuItem> {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
-        leading: Image.asset(widget.imagePath, width: 50, height: 50, fit: BoxFit.cover),
+        leading: Image.asset(widget.imagePath,
+            width: 50, height: 50, fit: BoxFit.cover),
         title: Text(widget.name),
         subtitle: Text(widget.description),
         trailing: Column(
@@ -220,9 +224,24 @@ class CommunityPage extends StatefulWidget {
 
 class _CommunityPageState extends State<CommunityPage> {
   List<Review> reviews = [
-    Review(profileImage: 'assets/images/profile1.png', rating: 4.0, title: '사장님이 너무 친절해요!', content: '음식도 맛있고 알바생분들도 너무 이뻐요!', likes: 20),
-    Review(profileImage: 'assets/images/profile2.png', rating: 2.0, title: '화장실 잠금장치 ㅠㅠ', content: '화장실 문 안잠겨요 고쳐주세요 ㅠㅠ', likes: 99),
-    Review(profileImage: 'assets/images/profile3.png', rating: 5.0, title: '아이고 사장님', content: '서비스를 너무 많이 주셨어요 ㅠㅠㅠㅠ', likes: 5),
+    Review(
+        profileImage: 'assets/images/profile1.png',
+        rating: 4.0,
+        title: '사장님이 너무 친절해요!',
+        content: '음식도 맛있고 알바생분들도 너무 이뻐요!',
+        likes: 20),
+    Review(
+        profileImage: 'assets/images/profile2.png',
+        rating: 2.0,
+        title: '화장실 잠금장치 ㅠㅠ',
+        content: '화장실 문 안잠겨요 고쳐주세요 ㅠㅠ',
+        likes: 99),
+    Review(
+        profileImage: 'assets/images/profile3.png',
+        rating: 5.0,
+        title: '아이고 사장님',
+        content: '서비스를 너무 많이 주셨어요 ㅠㅠㅠㅠ',
+        likes: 5),
   ];
 
   void _addReview(Review review) {
@@ -297,7 +316,8 @@ class ReviewWidget extends StatelessWidget {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
-        leading: Image.asset(review.profileImage, width: 50, height: 50, fit: BoxFit.cover),
+        leading: Image.asset(review.profileImage,
+            width: 50, height: 50, fit: BoxFit.cover),
         title: Row(
           children: [
             Icon(Icons.star, color: Colors.yellow, size: 16.0),
@@ -402,18 +422,78 @@ class ReservationPage extends StatefulWidget {
 
 class _ReservationPageState extends State<ReservationPage> {
   List<TableStatus> tableStatuses = [
-    TableStatus(id: 1, seats: 12, maxSeats: 13, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 2, seats: 6, maxSeats: 7, status: TableState.unavailable, shape: TableShape.rectangle),
-    TableStatus(id: 3, seats: 4, maxSeats: 4, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 4, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 5, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 6, seats: 2, maxSeats: 3, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 7, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 8, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 9, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 10, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 11, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 12, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square)
+    TableStatus(
+        id: 1,
+        seats: 12,
+        maxSeats: 13,
+        status: TableState.available,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 2,
+        seats: 6,
+        maxSeats: 7,
+        status: TableState.unavailable,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 3,
+        seats: 4,
+        maxSeats: 4,
+        status: TableState.available,
+        shape: TableShape.square),
+    TableStatus(
+        id: 4,
+        seats: 6,
+        maxSeats: 7,
+        status: TableState.available,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 5,
+        seats: 6,
+        maxSeats: 7,
+        status: TableState.available,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 6,
+        seats: 2,
+        maxSeats: 3,
+        status: TableState.available,
+        shape: TableShape.square),
+    TableStatus(
+        id: 7,
+        seats: 6,
+        maxSeats: 7,
+        status: TableState.available,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 8,
+        seats: 6,
+        maxSeats: 7,
+        status: TableState.available,
+        shape: TableShape.rectangle),
+    TableStatus(
+        id: 9,
+        seats: 4,
+        maxSeats: 6,
+        status: TableState.available,
+        shape: TableShape.square),
+    TableStatus(
+        id: 10,
+        seats: 4,
+        maxSeats: 6,
+        status: TableState.available,
+        shape: TableShape.square),
+    TableStatus(
+        id: 11,
+        seats: 4,
+        maxSeats: 6,
+        status: TableState.available,
+        shape: TableShape.square),
+    TableStatus(
+        id: 12,
+        seats: 4,
+        maxSeats: 6,
+        status: TableState.available,
+        shape: TableShape.square)
   ];
 
   int? selectedTableId;
@@ -507,18 +587,29 @@ class _ReservationPageState extends State<ReservationPage> {
           color: Color(0xFFE0BEE0),
           child: Stack(
             children: [
-              buildTable(tableStatuses[0], 20, 20, width: 380, height: 80), // Large rectangle
-              buildTable(tableStatuses[1], 120, 20, width: 80, height: 160), // Tall rectangle
-              buildTable(tableStatuses[2], 120, 130, width: 80, height: 80), // Rectangle
-              buildTable(tableStatuses[3], 120, 240, width: 160, height: 80), // Square
-              buildTable(tableStatuses[4], 240, 240, width: 160, height: 80), // Rectangle
-              buildTable(tableStatuses[5], 300, 20, width: 80, height: 80), // Rectangle
-              buildTable(tableStatuses[6], 400, 20, width: 80, height: 160), // Square
-              buildTable(tableStatuses[7], 580, 20, width: 80, height: 160), // Square
-              buildTable(tableStatuses[8], 480, 200, width: 80, height: 80), // Square
-              buildTable(tableStatuses[9], 480, 300, width: 80, height: 80), // Square
+              buildTable(tableStatuses[0], 20, 20,
+                  width: 380, height: 80), // Large rectangle
+              buildTable(tableStatuses[1], 120, 20,
+                  width: 80, height: 160), // Tall rectangle
+              buildTable(tableStatuses[2], 120, 130,
+                  width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[3], 120, 240,
+                  width: 160, height: 80), // Square
+              buildTable(tableStatuses[4], 240, 240,
+                  width: 160, height: 80), // Rectangle
+              buildTable(tableStatuses[5], 300, 20,
+                  width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[6], 400, 20,
+                  width: 80, height: 160), // Square
+              buildTable(tableStatuses[7], 580, 20,
+                  width: 80, height: 160), // Square
+              buildTable(tableStatuses[8], 480, 200,
+                  width: 80, height: 80), // Square
+              buildTable(tableStatuses[9], 480, 300,
+                  width: 80, height: 80), // Square
               buildTable(tableStatuses[10], 580, 200, width: 80, height: 80),
-              buildTable(tableStatuses[11], 580, 300, width: 80, height: 80),// Tall rectangle
+              buildTable(tableStatuses[11], 580, 300,
+                  width: 80, height: 80), // Tall rectangle
               Positioned(
                 bottom: 20,
                 left: 160,
@@ -560,47 +651,47 @@ class _ReservationPageState extends State<ReservationPage> {
       child: GestureDetector(
         onTap: table.status == TableState.available
             ? () {
-          setState(() {
-            selectedTableId = table.id;
-            _showReservationDialog(table.id);
-          });
-        }
+                setState(() {
+                  selectedTableId = table.id;
+                  _showReservationDialog(table.id);
+                });
+              }
             : table.status == TableState.myReserved
-            ? () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("내 예약 정보"),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("방문 시간: ${table.visitTime}"),
-                    Text("방문 인원수: ${table.visitPeople}"),
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    child: Text("예약 취소하기"),
-                    onPressed: () {
-                      setState(() {
-                        table.status = TableState.available;
-                      });
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: Text("확인"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }
-            : null,
+                ? () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("내 예약 정보"),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("방문 시간: ${table.visitTime}"),
+                              Text("방문 인원수: ${table.visitPeople}"),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text("예약 취소하기"),
+                              onPressed: () {
+                                setState(() {
+                                  table.status = TableState.available;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text("확인"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                : null,
         child: Container(
           width: width,
           height: height,

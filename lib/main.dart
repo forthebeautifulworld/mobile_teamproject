@@ -1,3 +1,4 @@
+//main.dart
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 
@@ -5,8 +6,6 @@ void main() {
   runApp(const MyApp());
 }
 
-//hifdffadfdsf
-//정다훈adsfasdfsadfasdfasdf
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -37,7 +36,7 @@ class InitialPage extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Image.asset(
-            'assets/images/initial_page_image.png', // initial_page�쓽 �씠誘몄�� �뙆�씪 寃쎈줈
+            'assets/images/initial_page_image.png', // initial_page
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
@@ -47,4 +46,3 @@ class InitialPage extends StatelessWidget {
     );
   }
 }
-
