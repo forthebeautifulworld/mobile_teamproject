@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../store_register_page.dart'; // Ensure this import is present
 import '../tabs/menu_tab.dart';
 import '../tabs/community_tab.dart';
 import '../pages/reservation_page.dart';
@@ -32,7 +33,7 @@ class _RestaurantPageState extends State<RestaurantPage>
             icon:
                 Image.asset('assets/images/back_button.png'), // 뒤로가기 버튼 이미지 경로
             onPressed: () {
-              // 뒤로가기 기능 구현
+              Navigator.pop(context); // 뒤로가기 기능 구현
             },
           ),
         ),
@@ -41,7 +42,7 @@ class _RestaurantPageState extends State<RestaurantPage>
             Image.asset('assets/images/top_pizza_image.png', fit: BoxFit.cover),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
+              child: const Text(
                 '고래한입피자 단국대점',
                 style: TextStyle(
                   fontSize: 24,
@@ -57,7 +58,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                     controller: _tabController,
                     tabs: [
                       Tab(text: '메뉴'),
-                      Tab(text: '커뮤니티'),
+                      const Tab(text: '커뮤니티'),
                     ],
                   ),
                   Container(
@@ -87,7 +88,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                     MaterialPageRoute(builder: (context) => ReservationPage()),
                   );
                 },
-                child: Text('예약하기'),
+                child: const Text('예약하기'),
               )
             : null,
       ),
