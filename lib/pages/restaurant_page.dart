@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../store_register_page.dart'; // Ensure this import is present
 import '../tabs/menu_tab.dart';
 import '../tabs/community_tab.dart';
 import '../pages/reservation_page.dart';

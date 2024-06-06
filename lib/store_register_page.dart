@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // image_picker 플러그인 임포트
 import 'home_page.dart';
 import 'database_helper.dart';
-import 'store_list_page.dart';
 
 class StoreRegisterPage extends StatefulWidget {
   const StoreRegisterPage({super.key});
@@ -37,8 +36,6 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
   //   // 이전 페이지에서 전달된 사용자 정보 가져오기
   //   userInfo = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
   // }
-
-
 
   @override
   void didChangeDependencies() {
@@ -82,12 +79,17 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
     String storeName = storeNameController.text;
     String ownerName = ownerNameController.text;
     String storeLocation = storeLocationController.text;
-    String storePhone = storePhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
-    String businessNumber = businessNumberController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
-    String ownerPhone = ownerPhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String storePhone =
+        storePhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String businessNumber = businessNumberController.text
+        .replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String ownerPhone =
+        ownerPhoneController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
     String storeType = storeTypeController.text;
-    String avgPrice = avgPriceController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
-    String maxCapacity = maxCapacityController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String avgPrice =
+        avgPriceController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
+    String maxCapacity =
+        maxCapacityController.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 추출;
     String storeFeatures = storeFeaturesController.text;
 
     if (storeName.isEmpty ||
@@ -120,7 +122,8 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
         if (userInfo.isNotEmpty) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage(userInfo: userInfo)),
+            MaterialPageRoute(
+                builder: (context) => HomePage(userInfo: userInfo)),
           );
         } else {
           Navigator.pushReplacement(
