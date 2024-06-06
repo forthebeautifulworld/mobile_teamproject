@@ -27,6 +27,27 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
   File? menuFile;
   File? layoutFile;
 
+  Map<String, dynamic> userInfo = {};
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // 이전 페이지에서 전달된 사용자 정보 가져오기
+  //   userInfo = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+  // }
+
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 이전 페이지에서 전달된 사용자 정보 가져오기
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+    if (arguments != null && arguments is Map<String, dynamic>) {
+      userInfo = arguments;
+    }
+  }
+
   String profileImage = 'assets/images/default_profile.jpeg';
 
   void updateProfileImage() {
@@ -94,10 +115,17 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
 
       try {
         await DatabaseHelper().insertStore(store);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
-        );
+        if (userInfo.isNotEmpty) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage(userInfo: userInfo)),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+          );
+        }
       } catch (e) {
         print('Error: $e');
         _showError("매장 등록에 실패했습니다. 다시 시도해 주세요.");

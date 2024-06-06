@@ -107,6 +107,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const StoreRegisterPage(),
+                          settings: RouteSettings(arguments: widget.userInfo),
                         ),
                       );
                     },
