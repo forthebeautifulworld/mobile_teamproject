@@ -46,7 +46,7 @@ class _WriteReviewPageState extends State<WriteReviewPage> {
               decoration: InputDecoration(labelText: '내용을 입력해주세요.'),
               maxLines: 5,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 final newReview = Review(
@@ -58,7 +58,7 @@ class _WriteReviewPageState extends State<WriteReviewPage> {
                 );
                 Navigator.pop(context, newReview);
               },
-              child: Text('완료'),
+              child: const Text('완료'),
             ),
           ],
         ),

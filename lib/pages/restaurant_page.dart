@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_team_project/tabs/menu_tab.dart';
-import 'package:mobile_team_project/tabs/community_tab.dart';
-import 'package:mobile_team_project/pages/reservation_page.dart';
+import '../tabs/menu_tab.dart';
+import '../tabs/community_tab.dart';
+import '../pages/reservation_page.dart';
 
 class RestaurantPage extends StatefulWidget {
   @override

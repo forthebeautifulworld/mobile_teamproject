@@ -1,3 +1,4 @@
+//community_page.dart
 import 'package:flutter/material.dart';
 import '../models/review.dart';
 import '../pages/write_review_page.dart';
@@ -69,7 +70,7 @@ class _CommunityPageState extends State<CommunityPage> {
             _addReview(result);
           }
         },
-        child: Text('글쓰기'),
+        child: const Text('글쓰기'),
       ),
     );
   }

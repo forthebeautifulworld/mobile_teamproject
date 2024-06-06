@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_team_project/models/table_status.dart'; // 경로가 올바른지 확인
+import '../models/table_status.dart'; // 경로가 올바른지 확인
 
 class ReservationPage extends StatefulWidget {
+  ReservationPage({Key? key}) : super(key: key); // Key parameter added
+
   @override
-  _ReservationPageState createState() => _ReservationPageState();
+  ReservationPageState createState() => ReservationPageState(); // Made public
 }
 
-class _ReservationPageState extends State<ReservationPage> {
+class ReservationPageState extends State<ReservationPage> {
+  // Made public
   List<TableStatus> tableStatuses = [
     TableStatus(
         id: 1,
@@ -93,23 +96,25 @@ class _ReservationPageState extends State<ReservationPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("예약 정보 입력"),
+          title: const Text("예약 정보 입력"), // Added const
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: timeController,
-                decoration: InputDecoration(labelText: "방문 시간"),
+                decoration:
+                    const InputDecoration(labelText: "방문 시간"), // Added const
               ),
               TextField(
                 controller: peopleController,
-                decoration: InputDecoration(labelText: "방문 인원수"),
+                decoration:
+                    const InputDecoration(labelText: "방문 인원수"), // Added const
               ),
             ],
           ),
           actions: [
             TextButton(
-              child: Text("취소"),
+              child: const Text("취소"), // Added const
               onPressed: () {
                 setState(() {
                   selectedTableId = null;
@@ -118,7 +123,7 @@ class _ReservationPageState extends State<ReservationPage> {
               },
             ),
             TextButton(
-              child: Text("확정"),
+              child: const Text("확정"), // Added const
               onPressed: () {
                 int peopleCount = int.tryParse(peopleController.text) ?? 0;
                 if (peopleCount > table.maxSeats) {
@@ -126,11 +131,12 @@ class _ReservationPageState extends State<ReservationPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("오류"),
-                        content: Text("테이블의 최대 인원수를 확인해주세요."),
+                        title: const Text("오류"), // Added const
+                        content:
+                            const Text("테이블의 최대 인원수를 확인해주세요."), // Added const
                         actions: [
                           TextButton(
-                            child: Text("확인"),
+                            child: const Text("확인"), // Added const
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -160,9 +166,9 @@ class _ReservationPageState extends State<ReservationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("테이블 예약"),
+        title: const Text("테이블 예약"), // Added const
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back), // Added const
           onPressed: () {
             Navigator.pop(context);
           },
@@ -170,7 +176,7 @@ class _ReservationPageState extends State<ReservationPage> {
       ),
       body: Center(
         child: Container(
-          color: Color(0xFFE0BEE0),
+          color: const Color(0xFFE0BEE0), // Added const
           child: Stack(
             children: [
               buildTable(tableStatuses[0], 20, 20,
@@ -196,7 +202,7 @@ class _ReservationPageState extends State<ReservationPage> {
               buildTable(tableStatuses[10], 580, 200, width: 80, height: 80),
               buildTable(tableStatuses[11], 580, 300,
                   width: 80, height: 80), // Tall rectangle
-              Positioned(
+              const Positioned(
                 bottom: 20,
                 left: 160,
                 child: Text(
@@ -248,7 +254,7 @@ class _ReservationPageState extends State<ReservationPage> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("내 예약 정보"),
+                          title: const Text("내 예약 정보"), // Added const
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -258,7 +264,7 @@ class _ReservationPageState extends State<ReservationPage> {
                           ),
                           actions: [
                             TextButton(
-                              child: Text("예약 취소하기"),
+                              child: const Text("예약 취소하기"), // Added const
                               onPressed: () {
                                 setState(() {
                                   table.status = TableState.available;
@@ -267,7 +273,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               },
                             ),
                             TextButton(
-                              child: Text("확인"),
+                              child: const Text("확인"), // Added const
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -292,11 +298,11 @@ class _ReservationPageState extends State<ReservationPage> {
               children: [
                 Text(
                   "${table.seats}",
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24), // Added const
                 ),
                 Text(
                   "~${table.maxSeats}",
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12), // Added const
                 ),
               ],
             ),
