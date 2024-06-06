@@ -30,16 +30,18 @@ class ReviewWidget extends StatelessWidget {
           ],
         ),
         subtitle: Text(review.content),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
               icon: Icon(
                 review.isLiked ? Icons.favorite : Icons.favorite_border,
-                color: Colors.red,
+                color: review.isLiked ? Colors.red : Colors.grey,
+                size: 20.0,
               ),
               onPressed: onLike,
             ),
+            SizedBox(width: 4.0),
             Text(review.likes.toString()),
           ],
         ),

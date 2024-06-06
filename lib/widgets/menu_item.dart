@@ -45,26 +45,21 @@ class _MenuItemState extends State<MenuItem> {
             width: 50, height: 50, fit: BoxFit.cover),
         title: Text(widget.name),
         subtitle: Text(widget.description),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(widget.price, style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 4.0),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    isLiked ? Icons.favorite : Icons.favorite_border,
-                    color: isLiked ? Colors.red : Colors.grey,
-                    size: 20.0,
-                  ),
-                  onPressed: _toggleLike,
-                ),
-                SizedBox(width: 4.0),
-                Text(likes.toString()),
-              ],
+            SizedBox(width: 8.0),
+            IconButton(
+              icon: Icon(
+                isLiked ? Icons.favorite : Icons.favorite_border,
+                color: isLiked ? Colors.red : Colors.grey,
+                size: 20.0,
+              ),
+              onPressed: _toggleLike,
             ),
+            SizedBox(width: 4.0),
+            Text(likes.toString()),
           ],
         ),
       ),
