@@ -41,7 +41,7 @@ class StoreSearchPage extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
             );
           } else if (index == 1) {
             // My Info �럹�씠吏�濡� �씠�룞

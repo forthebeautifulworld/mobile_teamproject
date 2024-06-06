@@ -4,7 +4,9 @@ import 'store_search_page.dart';
 import 'store_register_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final Map<String, dynamic> userInfo; // 사용자 정보를 저장할 Map
+
+  const HomePage({super.key, required this.userInfo});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -23,11 +25,14 @@ class _HomePageState extends State<HomePage> {
                   'assets/images/default_profile.jpeg'), // 프로필 이미지 경로
             ),
             const SizedBox(width: 10),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("정다훈"),
-                Text("미식가", style: TextStyle(fontSize: 12)),
+                if (widget.userInfo.isNotEmpty)
+                  Text(widget.userInfo['name']),
+                // 사용자 정보가 없으면 기본 텍스트 출력
+                if (widget.userInfo.isEmpty)
+                  const Text('Guest'),
               ],
             ),
             const Spacer(),

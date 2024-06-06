@@ -14,7 +14,7 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void signIn() async{
+  void signIn() async {
     // 여기에 실제 로그인 로직을 추가하세요 (ex. Firebase Auth)
     String email = emailController.text;
     String password = passwordController.text;
@@ -23,16 +23,22 @@ class LoginPageState extends State<LoginPage> {
     List<Map<String, dynamic>> users = await DatabaseHelper().getUsers();
 
     // 입력한 email과 password가 데이터베이스에 존재하는지 확인합니다.
-    bool userExists = users.any((user) => user['userId'] == email && user['password'] == password);
+    Map<String, dynamic>? user = users.firstWhere(
+          (user) => user['userId'] == email && user['password'] == password,
+      orElse: () => {}, // 빈 맵 반환
+    );
 
-    if (userExists) {
-      // 로그인 성공 시 my_app3로 이동
+    if (user != null) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage(userInfo: user)),
       );
     } else {
-      // 로그인 실패 시 경고 메시지
+      // 사용자 정보가 없을 때 빈 맵 전달
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
+      );
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Invalid email or password")),
       );
