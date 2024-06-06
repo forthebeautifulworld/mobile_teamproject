@@ -4,6 +4,7 @@ class Review {
   final String title;
   final String content;
   int likes;
+  bool isLiked; // Add this line
 
   Review({
     required this.profileImage,
@@ -11,5 +12,6 @@ class Review {
     required this.title,
     required this.content,
     required this.likes,
+    this.isLiked = false, // Initialize isLiked to false
   });
 }
