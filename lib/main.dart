@@ -37,7 +37,7 @@ class InitialPage extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Image.asset(
-            'assets/images/initial_page_image.jpg', // initial_page�쓽 �씠誘몄�� �뙆�씪 寃쎈줈
+            'assets/images/initial_page_image.png', // initial_page�쓽 �씠誘몄�� �뙆�씪 寃쎈줈
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
@@ -47,3 +47,4 @@ class InitialPage extends StatelessWidget {
     );
   }
 }
+

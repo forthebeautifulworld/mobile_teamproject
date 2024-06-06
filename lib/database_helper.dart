@@ -20,10 +20,22 @@ class DatabaseHelper {
       path,
       version: 1,
       onCreate: (db, version) {
-        return db.execute(
+        db.execute(
           "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birth TEXT, userId TEXT, password TEXT)",
         );
+        // 새로운 테이블 생성
+        db.execute(
+          "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice TEXT, menuFile TEXT, layoutFile TEXT, maxCapacity TEXT, storeFeatures TEXT)",
+        );
       },
+    );
+  }
+  Future<void> insertStore(Map<String, dynamic> store) async {
+    final db = await database;
+    await db.insert(
+      'stores',
+      store,
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
@@ -40,4 +52,10 @@ class DatabaseHelper {
     final db = await database;
     return await db.query('users');
   }
+
+  Future<List<Map<String, dynamic>>> getStores() async {
+    final db = await database;
+    return await db.query('stores');
+  }
 }
+
