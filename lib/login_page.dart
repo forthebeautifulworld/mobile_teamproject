@@ -1,3 +1,4 @@
+//login_page.dart
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'signup_page.dart'; // 회원가입 페이지로 이동하도록 import 추가
@@ -24,7 +25,7 @@ class LoginPageState extends State<LoginPage> {
 
     // 입력한 email과 password가 데이터베이스에 존재하는지 확인합니다.
     Map<String, dynamic>? user = users.firstWhere(
-          (user) => user['userId'] == email && user['password'] == password,
+      (user) => user['userId'] == email && user['password'] == password,
       orElse: () => {}, // 빈 맵 반환
     );
 
@@ -68,7 +69,7 @@ class LoginPageState extends State<LoginPage> {
                   const Text(
                     "Login",
                     style:
-                    TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
@@ -140,5 +141,3 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

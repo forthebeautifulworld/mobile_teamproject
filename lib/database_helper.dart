@@ -1,3 +1,4 @@
+//database_helper.dart
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -30,6 +31,7 @@ class DatabaseHelper {
       },
     );
   }
+
   Future<void> insertStore(Map<String, dynamic> store) async {
     final db = await database;
     await db.insert(
@@ -58,4 +60,3 @@ class DatabaseHelper {
     return await db.query('stores');
   }
 }
-

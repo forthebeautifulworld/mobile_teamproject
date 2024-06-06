@@ -1,7 +1,8 @@
+//signup_page.dart
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'database_helper.dart';  // Import the database helper class
-import 'users_page.dart';  // Import the users page class
+import 'database_helper.dart'; // Import the database helper class
+import 'users_page.dart'; // Import the users page class
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
