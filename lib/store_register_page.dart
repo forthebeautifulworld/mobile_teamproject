@@ -80,7 +80,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
       // 모든 입력이 완료된 경우, DB에 저장하는 부분 구현 필요
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
       );
     }
   }
@@ -301,7 +301,7 @@ class StoreRegisterPageState extends State<StoreRegisterPage> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            MaterialPageRoute(builder: (context) => HomePage(userInfo: {})),
                           );
                         },
                         style: ElevatedButton.styleFrom(
