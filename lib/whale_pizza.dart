@@ -181,7 +181,7 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
         leading: Image.asset(widget.imagePath, width: 50, height: 50, fit: BoxFit.cover),
         title: Text(widget.name),
@@ -403,16 +403,17 @@ class ReservationPage extends StatefulWidget {
 class _ReservationPageState extends State<ReservationPage> {
   List<TableStatus> tableStatuses = [
     TableStatus(id: 1, seats: 12, maxSeats: 13, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 2, seats: 4, maxSeats: 4, status: TableState.unavailable, shape: TableShape.square),
-    TableStatus(id: 3, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 4, seats: 2, maxSeats: 3, status: TableState.available, shape: TableShape.square),
+    TableStatus(id: 2, seats: 6, maxSeats: 7, status: TableState.unavailable, shape: TableShape.rectangle),
+    TableStatus(id: 3, seats: 4, maxSeats: 4, status: TableState.available, shape: TableShape.square),
+    TableStatus(id: 4, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
     TableStatus(id: 5, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 6, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
-    TableStatus(id: 7, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
-    TableStatus(id: 8, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
+    TableStatus(id: 6, seats: 2, maxSeats: 3, status: TableState.available, shape: TableShape.square),
+    TableStatus(id: 7, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
+    TableStatus(id: 8, seats: 6, maxSeats: 7, status: TableState.available, shape: TableShape.rectangle),
     TableStatus(id: 9, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
     TableStatus(id: 10, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
     TableStatus(id: 11, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square),
+    TableStatus(id: 12, seats: 4, maxSeats: 6, status: TableState.available, shape: TableShape.square)
   ];
 
   int? selectedTableId;
@@ -506,17 +507,18 @@ class _ReservationPageState extends State<ReservationPage> {
           color: Color(0xFFE0BEE0),
           child: Stack(
             children: [
-              buildTable(tableStatuses[0], 20, 20, width: 260, height: 60), // Large rectangle
-              buildTable(tableStatuses[1], 20, 100, width: 60, height: 120), // Tall rectangle
-              buildTable(tableStatuses[2], 100, 100, width: 120, height: 60), // Rectangle
-              buildTable(tableStatuses[3], 240, 100, width: 60, height: 60), // Square
-              buildTable(tableStatuses[4], 20, 240, width: 120, height: 60), // Rectangle
-              buildTable(tableStatuses[5], 20, 320, width: 120, height: 60), // Rectangle
-              buildTable(tableStatuses[6], 160, 240, width: 60, height: 60), // Square
-              buildTable(tableStatuses[7], 240, 240, width: 60, height: 60), // Square
-              buildTable(tableStatuses[8], 160, 320, width: 60, height: 60), // Square
-              buildTable(tableStatuses[9], 240, 320, width: 60, height: 60), // Square
-              buildTable(tableStatuses[10], 20, 400, width: 60, height: 120), // Tall rectangle
+              buildTable(tableStatuses[0], 20, 20, width: 380, height: 80), // Large rectangle
+              buildTable(tableStatuses[1], 120, 20, width: 80, height: 160), // Tall rectangle
+              buildTable(tableStatuses[2], 120, 130, width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[3], 120, 240, width: 160, height: 80), // Square
+              buildTable(tableStatuses[4], 240, 240, width: 160, height: 80), // Rectangle
+              buildTable(tableStatuses[5], 300, 20, width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[6], 400, 20, width: 80, height: 160), // Square
+              buildTable(tableStatuses[7], 580, 20, width: 80, height: 160), // Square
+              buildTable(tableStatuses[8], 480, 200, width: 80, height: 80), // Square
+              buildTable(tableStatuses[9], 480, 300, width: 80, height: 80), // Square
+              buildTable(tableStatuses[10], 580, 200, width: 80, height: 80),
+              buildTable(tableStatuses[11], 580, 300, width: 80, height: 80),// Tall rectangle
               Positioned(
                 bottom: 20,
                 left: 160,
@@ -578,6 +580,15 @@ class _ReservationPageState extends State<ReservationPage> {
                   ],
                 ),
                 actions: [
+                  TextButton(
+                    child: Text("예약 취소하기"),
+                    onPressed: () {
+                      setState(() {
+                        table.status = TableState.available;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
                   TextButton(
                     child: Text("확인"),
                     onPressed: () {
