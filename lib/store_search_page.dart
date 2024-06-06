@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'pages/restaurant_page.dart'; // 새로 추가한 레스토랑 페이지 임포트
 
 class StoreSearchPage extends StatelessWidget {
   const StoreSearchPage({super.key});
@@ -13,13 +14,30 @@ class StoreSearchPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
+          // 지도 이미지
+          Positioned.fill(
             child: Image.asset(
-              'assets/images/map.png', // 지도 이미지 파일 경로
+              'assets/images/map.png',
               fit: BoxFit.cover,
               width: double.infinity,
+            ),
+          ),
+          // 가운데 마커 아이콘
+          Center(
+            child: IconButton(
+              icon: const Icon(
+                Icons.location_on,
+                size: 40.0,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RestaurantPage()),
+                );
+              },
             ),
           ),
         ],
@@ -40,15 +58,11 @@ class StoreSearchPage extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage(userInfo: {})),
+              MaterialPageRoute(
+                  builder: (context) => const HomePage(userInfo: {})),
             );
-          } else if (index == 1) {
-            // My Info 페이지로 이동
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const MyInfoPage()),
-            // );
           }
+          // 다른 탭을 클릭했을 때의 로직 추가 가능
         },
       ),
     );
