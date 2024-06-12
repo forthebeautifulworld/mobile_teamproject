@@ -4,7 +4,7 @@ import 'home_page.dart';
 import 'pages/restaurant_page.dart';
 
 class StoreSearchPage extends StatefulWidget {
-  const StoreSearchPage({super.key});
+  const StoreSearchPage({Key? key}) : super(key: key);
 
   @override
   _StoreSearchPageState createState() => _StoreSearchPageState();
@@ -12,7 +12,7 @@ class StoreSearchPage extends StatefulWidget {
 
 class _StoreSearchPageState extends State<StoreSearchPage> {
   int nrow = 0;
-  List<String> storeNames = [];
+  List<String> businessNumbers = [];
 
   final List<Map<String, int>> locations = [
     {"left": 50, "top": 100},
@@ -30,10 +30,10 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
 
   Future<void> _fetchStoreData() async {
     final count = await DatabaseHelper().getStoreCount();
-    final names = await DatabaseHelper().getStoreNames();
+    final numbers = await DatabaseHelper().getBusinessNumbers();
     setState(() {
       nrow = count;
-      storeNames = names;
+      businessNumbers = numbers;
     });
   }
 
@@ -52,7 +52,7 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => RestaurantPage(storeName: '고래한입피자 단국대점'),
+                builder: (context) => const RestaurantPage(businessNumber: 'whale_pizza'),
               ),
             );
           },
@@ -74,7 +74,7 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => RestaurantPage(storeName: storeNames[i]),
+                builder: (context) => RestaurantPage(businessNumber: businessNumbers[i]),
               ),
             );
           },

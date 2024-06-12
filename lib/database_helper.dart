@@ -37,24 +37,6 @@ class DatabaseHelper {
     );
   }
 
-  Future<void> deleteUser(int id) async {
-    final db = await database;
-    await db.delete(
-      'users',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  Future<void> deleteStore(int id) async {
-    final db = await database;
-    await db.delete(
-      'stores',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
-
   Future<void> insertStore(Map<String, dynamic> store) async {
     final db = await database;
     await db.insert(
@@ -73,6 +55,24 @@ class DatabaseHelper {
     );
   }
 
+  Future<void> deleteUser(int id) async {
+    final db = await database;
+    await db.delete(
+      'users',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> deleteStore(int id) async {
+    final db = await database;
+    await db.delete(
+      'stores',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<List<Map<String, dynamic>>> getUsers() async {
     final db = await database;
     return await db.query('users');
@@ -88,11 +88,27 @@ class DatabaseHelper {
     return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM stores'))!;
   }
 
-  Future<List<String>> getStoreNames() async {
+  Future<List<String>> getBusinessNumbers() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('stores', columns: ['storeName']);
+    final List<Map<String, dynamic>> maps = await db.query('stores', columns: ['businessNumber']);
     return List.generate(maps.length, (i) {
-      return maps[i]['storeName'];
+      return maps[i]['businessNumber'];
     });
+  }
+
+  Future<String> getStoreNameByBusinessNumber(String businessNumber) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'stores',
+      columns: ['storeName'],
+      where: 'businessNumber = ?',
+      whereArgs: [businessNumber],
+    );
+
+    if (maps.isNotEmpty) {
+      return maps.first['storeName'];
+    } else {
+      throw Exception('Store not found');
+    }
   }
 }
