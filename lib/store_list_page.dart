@@ -24,6 +24,11 @@ class _StoreListPageState extends State<StoreListPage> {
     });
   }
 
+  Future<void> _deleteStore(int id) async {
+    await DatabaseHelper().deleteStore(id);
+    _loadStores(); // 삭제 후 리스트를 새로고침
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +93,12 @@ class _StoreListPageState extends State<StoreListPage> {
                     ListTile(
                       title: const Text('Store Features'),
                       subtitle: Text(store['storeFeatures']),
+                    ),
+                    ListTile(
+                      title: ElevatedButton(
+                        onPressed: () => _deleteStore(store['id']),
+                        child: const Text('Delete Store'),
+                      ),
                     ),
                   ],
                 );
