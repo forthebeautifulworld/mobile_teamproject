@@ -35,8 +35,7 @@ class _RestaurantPageState extends State<RestaurantPage>
       });
     }
     else {
-      String name = await DatabaseHelper().getStoreNameByBusinessNumber(
-          widget.businessNumber);
+      String name = await DatabaseHelper().getStoreNameByBusinessNumber(widget.businessNumber);
       setState(() {
         storeName = name;
       });
@@ -58,7 +57,6 @@ class _RestaurantPageState extends State<RestaurantPage>
                   'assets/images/top_pizza_image.png',
                   fit: BoxFit.cover,
                 ),
-                title: Text(storeName),
               ),
               leading: IconButton(
                 icon: Image.asset('assets/images/back_button.png'),
@@ -69,7 +67,8 @@ class _RestaurantPageState extends State<RestaurantPage>
             ),
             SliverPersistentHeader(
               delegate: SliverAppBarDelegate(
-                TabBar(
+                title: storeName,
+                tabBar: TabBar(
                   controller: _tabController,
                   tabs: const [
                     Tab(text: '메뉴'),
@@ -106,26 +105,42 @@ class _RestaurantPageState extends State<RestaurantPage>
 }
 
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  SliverAppBarDelegate(this._tabBar);
+  SliverAppBarDelegate({required this.title, required this.tabBar});
 
-  final TabBar _tabBar;
+  final String title;
+  final TabBar tabBar;
 
   @override
-  double get minExtent => _tabBar.preferredSize.height;
+  double get minExtent => tabBar.preferredSize.height;
   @override
-  double get maxExtent => _tabBar.preferredSize.height;
+  double get maxExtent => tabBar.preferredSize.height + 40.0;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: Colors.white,
-      child: _tabBar,
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          tabBar,
+          Container(
+            color: Colors.purple,
+            height: 4.0,
+          ),
+        ],
+      ),
     );
   }
 
   @override
   bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
-    return false;
+    return oldDelegate.title != title || oldDelegate.tabBar != tabBar;
   }
 }
