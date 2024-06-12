@@ -1,4 +1,3 @@
-// database_helper.dart
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -38,6 +37,24 @@ class DatabaseHelper {
     );
   }
 
+  Future<void> deleteUser(int id) async {
+    final db = await database;
+    await db.delete(
+      'users',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> deleteStore(int id) async {
+    final db = await database;
+    await db.delete(
+      'stores',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<void> insertStore(Map<String, dynamic> store) async {
     final db = await database;
     await db.insert(
@@ -70,21 +87,12 @@ class DatabaseHelper {
     final db = await database;
     return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM stores'))!;
   }
-  Future<void> deleteUser(int id) async {
-    final db = await database;
-    await db.delete(
-      'users',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
 
-  Future<void> deleteStore(int id) async {
+  Future<List<String>> getStoreNames() async {
     final db = await database;
-    await db.delete(
-      'stores',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    final List<Map<String, dynamic>> maps = await db.query('stores', columns: ['storeName']);
+    return List.generate(maps.length, (i) {
+      return maps[i]['storeName'];
+    });
   }
 }

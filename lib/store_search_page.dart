@@ -12,9 +12,11 @@ class StoreSearchPage extends StatefulWidget {
 
 class _StoreSearchPageState extends State<StoreSearchPage> {
   int nrow = 0;
+  List<String> storeNames = [];
+
   final List<Map<String, int>> locations = [
-    {"left": 50, "top": 400},
-    {"left": 150, "top": 550},
+    {"left": 50, "top": 100},
+    {"left": 150, "top": 200},
     {"left": 250, "top": 300},
     {"left": 350, "top": 400},
     // 필요한 만큼 위치를 추가
@@ -23,21 +25,23 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
   @override
   void initState() {
     super.initState();
-    _fetchStoreCount();
+    _fetchStoreData();
   }
 
-  Future<void> _fetchStoreCount() async {
+  Future<void> _fetchStoreData() async {
     final count = await DatabaseHelper().getStoreCount();
+    final names = await DatabaseHelper().getStoreNames();
     setState(() {
       nrow = count;
+      storeNames = names;
     });
   }
 
   List<Widget> _buildMarkers() {
     List<Widget> markers = [
       Positioned(
-        left: 220,
-        top: 460,
+        left: 100,
+        top: 480,
         child: IconButton(
           icon: const Icon(
             Icons.location_on,
@@ -47,7 +51,9 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => RestaurantPage()),
+              MaterialPageRoute(
+                builder: (context) => RestaurantPage(storeName: '고래한입피자 단국대점'),
+              ),
             );
           },
         ),
@@ -67,7 +73,9 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => RestaurantPage()),
+              MaterialPageRoute(
+                builder: (context) => RestaurantPage(storeName: storeNames[i]),
+              ),
             );
           },
         ),
@@ -113,9 +121,12 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage(userInfo: {})),
+              MaterialPageRoute(
+                builder: (context) => const HomePage(userInfo: {}),
+              ),
             );
           }
+          // 다른 탭을 클릭했을 때의 로직 추가 가능
         },
       ),
     );
