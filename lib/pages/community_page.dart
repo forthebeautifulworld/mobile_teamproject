@@ -11,21 +11,21 @@ class CommunityPage extends StatefulWidget {
 class _CommunityPageState extends State<CommunityPage> {
   List<Review> reviews = [
     Review(
-        profileImage: 'assets/images/profile1.png',
+        profileImage: 'assets/images/default_profile.jpeg',
         rating: 4.0,
         title: '사장님이 너무 친절해요!',
         content: '음식도 맛있고 알바생분들도 너무 이뻐요!',
         likes: 20,
         isLiked: false),
     Review(
-        profileImage: 'assets/images/profile2.png',
+        profileImage: 'assets/images/default_profile.jpeg',
         rating: 2.0,
         title: '화장실 잠금장치 ㅠㅠ',
         content: '화장실 문 안잠겨요 고쳐주세요 ㅠㅠ',
         likes: 99,
         isLiked: false),
     Review(
-        profileImage: 'assets/images/profile3.png',
+        profileImage: 'assets/images/default_profile.jpeg',
         rating: 5.0,
         title: '아이고 사장님',
         content: '서비스를 너무 많이 주셨어요 ㅠㅠㅠㅠ',
