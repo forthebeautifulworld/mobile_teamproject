@@ -36,12 +36,7 @@ class HomePageState extends State<HomePage> {
               ],
             ),
             const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.notifications),
-              onPressed: () {
-                // 아무 기능도 없음
-              },
-            ),
+
           ],
         ),
       ),
@@ -68,7 +63,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => StoreSearchPage(user: widget.userInfo),
+                          builder: (context) => StoreSearchPage(),
                         ),
                       );
                     },
