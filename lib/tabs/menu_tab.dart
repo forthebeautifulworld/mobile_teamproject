@@ -1,3 +1,4 @@
+//메뉴 탭에 포함될 메뉴 아이템 위젯을 정의한 파일
 import 'package:flutter/material.dart';
 import '../widgets/menu_item.dart';
 
