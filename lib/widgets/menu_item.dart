@@ -50,7 +50,7 @@ class _MenuItemState extends State<MenuItem> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(widget.price, style: TextStyle(fontWeight: FontWeight.bold)), // 메뉴 가격
-            SizedBox(width: 8.0), // 가격과 아이콘 사이의 간격
+            SizedBox(width: 8.0), // 가격과 아이콘 사이의 간격 설정
             IconButton(
               icon: Icon(
                 isLiked ? Icons.favorite : Icons.favorite_border, // 좋아요 아이콘 변경
