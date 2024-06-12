@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'store_search_page.dart';
 import 'store_register_page.dart';
 import 'store_list_page.dart';
+import 'my_info_page.dart';
 
 class HomePage extends StatefulWidget {
   final Map<String, dynamic> userInfo; // 사용자 정보를 저장할 Map
@@ -67,7 +68,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const StoreSearchPage(),
+                          builder: (context) => StoreSearchPage(user: widget.userInfo),
                         ),
                       );
                     },
@@ -216,6 +217,10 @@ class HomePageState extends State<HomePage> {
             // HomePage로 이동하는 코드가 이미 있음
           } else if (index == 1) {
             // My Info 페이지로 이동하는 코드를 추가해야 함
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyInfoPage(userInfo: widget.userInfo)),
+            );
           }
         },
       ),
