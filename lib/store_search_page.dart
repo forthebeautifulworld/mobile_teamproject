@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import 'pages/restaurant_page.dart'; // 새로 추가한 레스토랑 페이지 임포트
+import 'pages/restaurant_page.dart';
+import 'my_info_page.dart'; // MyInfoPage 임포트 추가
 
 class StoreSearchPage extends StatelessWidget {
-  const StoreSearchPage({super.key});
+  final Map<String, dynamic> user; // 사용자 정보를 저장할 Map
+
+  const StoreSearchPage({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +62,17 @@ class StoreSearchPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const HomePage(userInfo: {})),
+                builder: (context) => HomePage(userInfo: user), // user 전달
+              ),
+            );
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyInfoPage(userInfo: user), // user 전달
+              ),
             );
           }
-          // 다른 탭을 클릭했을 때의 로직 추가 가능
         },
       ),
     );
