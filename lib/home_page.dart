@@ -211,7 +211,6 @@ class HomePageState extends State<HomePage> {
           if (index == 0) {
             // HomePage로 이동하는 코드가 이미 있음
           } else if (index == 1) {
-            // My Info 페이지로 이동하는 코드를 추가해야 함
             Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyInfoPage(userInfo: widget.userInfo)),
