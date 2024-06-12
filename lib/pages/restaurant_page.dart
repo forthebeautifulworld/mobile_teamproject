@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamproject123/tabs/default_community_tab.dart';
 import '../tabs/menu_tab.dart';
 import '../tabs/community_tab.dart';
 import '../tabs/default_tab.dart'; // defaultTab import 추가
@@ -8,7 +9,8 @@ import '../database_helper.dart';
 class RestaurantPage extends StatefulWidget {
   final String businessNumber;
 
-  const RestaurantPage({Key? key, required this.businessNumber}) : super(key: key);
+  const RestaurantPage({Key? key, required this.businessNumber})
+      : super(key: key);
 
   @override
   _RestaurantPageState createState() => _RestaurantPageState();
@@ -35,7 +37,8 @@ class _RestaurantPageState extends State<RestaurantPage>
         storeName = '고래피자 죽전점';
       });
     } else {
-      String name = await DatabaseHelper().getStoreNameByBusinessNumber(widget.businessNumber);
+      String name = await DatabaseHelper()
+          .getStoreNameByBusinessNumber(widget.businessNumber);
       setState(() {
         storeName = name;
       });
@@ -89,13 +92,13 @@ class _RestaurantPageState extends State<RestaurantPage>
                 controller: _tabController,
                 children: widget.businessNumber == 'whale_pizza'
                     ? [
-                  MenuTab(),
-                  CommunityTab(),
-                ]
+                        MenuTab(),
+                        CommunityTab(),
+                      ]
                     : [
-                  DefaultTab(),
-                  DefaultTab(),
-                ],
+                        DefaultTab(),
+                        DefaultCommunityTab(),
+                      ],
               ),
             ),
           ],
@@ -104,14 +107,14 @@ class _RestaurantPageState extends State<RestaurantPage>
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _tabController.index == 0
           ? ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ReservationPage()),
-          );
-        },
-        child: const Text('예약하기'),
-      )
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReservationPage()),
+                );
+              },
+              child: const Text('예약하기'),
+            )
           : null,
     );
   }
