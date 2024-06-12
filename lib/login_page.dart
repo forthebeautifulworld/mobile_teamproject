@@ -55,7 +55,7 @@ class LoginPageState extends State<LoginPage> {
               height: 250.0,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/fork_background.png'), // 포크 배경 이미지
+                  image: AssetImage('assets/images/fork_background.png'), // 포크 배경 이미지
                   fit: BoxFit.cover,
                 ),
               ),
@@ -128,6 +128,7 @@ class LoginPageState extends State<LoginPage> {
                     },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      minimumSize: const Size(double.infinity, 0),
                     ),
                     child: const Text("Sign up"),
                   ),

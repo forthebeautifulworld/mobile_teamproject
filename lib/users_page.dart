@@ -31,8 +31,9 @@ class UsersPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final user = users[index];
                 return ListTile(
-                  title: Text(user['id']),
+                  title: Text(user['userId'].toString()),
                   subtitle: Text('Password: ${user['password']}'),
+                  trailing: Text(user['name']),
                 );
               },
             );
