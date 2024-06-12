@@ -1,4 +1,4 @@
-//database_helper.dart
+// database_helper.dart
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -21,18 +21,15 @@ class DatabaseHelper {
       path,
       version: 2,
       onCreate: (db, version) {
-        // "users" 테이블 생성
         db.execute(
           "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, birth TEXT, userId TEXT, password TEXT)",
         );
-        // "stores" 테이블 생성
         db.execute(
           "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice INTEGER, menuFile TEXT, layoutFile TEXT, maxCapacity INTEGER, storeFeatures TEXT)",
         );
       },
       onUpgrade: (db, oldVersion, newVersion) {
         if (oldVersion < 2) {
-          // "stores" 테이블 생성 쿼리 실행
           db.execute(
             "CREATE TABLE stores(id INTEGER PRIMARY KEY AUTOINCREMENT, storeName TEXT, ownerName TEXT, storeLocation TEXT, storePhone TEXT, businessNumber TEXT, ownerPhone TEXT, storeType TEXT, avgPrice INTEGER, menuFile TEXT, layoutFile TEXT, maxCapacity INTEGER, storeFeatures TEXT)",
           );
@@ -67,5 +64,10 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getStores() async {
     final db = await database;
     return await db.query('stores');
+  }
+
+  Future<int> getStoreCount() async {
+    final db = await database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM stores'))!;
   }
 }
