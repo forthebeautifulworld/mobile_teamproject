@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../tabs/menu_tab.dart';
 import '../tabs/community_tab.dart';
+import '../tabs/default_tab.dart'; // defaultTab import 추가
 import '../pages/reservation_page.dart';
 import '../database_helper.dart';
 
@@ -29,12 +30,11 @@ class _RestaurantPageState extends State<RestaurantPage>
   }
 
   Future<void> _fetchStoreName() async {
-    if(widget.businessNumber == 'whale_pizza'){
+    if (widget.businessNumber == 'whale_pizza') {
       setState(() {
         storeName = '고래피자 죽전점';
       });
-    }
-    else {
+    } else {
       String name = await DatabaseHelper().getStoreNameByBusinessNumber(widget.businessNumber);
       setState(() {
         storeName = name;
@@ -54,7 +54,9 @@ class _RestaurantPageState extends State<RestaurantPage>
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
-                  'assets/images/top_pizza_image.png',
+                  widget.businessNumber == 'whale_pizza'
+                      ? 'assets/images/top_pizza_image.png'
+                      : 'assets/images/default_image.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -80,11 +82,22 @@ class _RestaurantPageState extends State<RestaurantPage>
             ),
           ];
         },
-        body: TabBarView(
-          controller: _tabController,
+        body: Column(
           children: [
-            MenuTab(),
-            CommunityTab(),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: widget.businessNumber == 'whale_pizza'
+                    ? [
+                  MenuTab(),
+                  CommunityTab(),
+                ]
+                    : [
+                  DefaultTab(),
+                  DefaultTab(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -111,9 +124,9 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabBar;
 
   @override
-  double get minExtent => tabBar.preferredSize.height;
+  double get minExtent => tabBar.preferredSize.height + 70.0;
   @override
-  double get maxExtent => tabBar.preferredSize.height + 40.0;
+  double get maxExtent => tabBar.preferredSize.height + 70.0;
 
   @override
   Widget build(
@@ -121,11 +134,13 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return Container(
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          SizedBox(height: 8.0), // 위쪽 여백 추가
           Text(
             title,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 30, // 텍스트 크기를 30으로 조절
               fontWeight: FontWeight.bold,
             ),
           ),
