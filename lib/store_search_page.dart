@@ -15,7 +15,7 @@ class _StoreSearchPageState extends State<StoreSearchPage> {
   List<String> businessNumbers = []; // 가게의 사업자 번호를 저장할 리스트
 
   final List<Map<String, int>> locations = [
-    {"left": 50, "top": 100},
+    {"left": 350, "top": 220},
     {"left": 150, "top": 200},
     {"left": 250, "top": 300},
     {"left": 350, "top": 400},

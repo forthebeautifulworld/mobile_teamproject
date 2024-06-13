@@ -225,7 +225,7 @@ class HomePageState extends State<HomePage> {
     return Column(
       children: [
         _buildEventItem(
-            'assets/images/store1.png', "복신", "시험기간 묵음밥 할인 이벤트!!", 4.8),
+            'assets/images/store1.png', "복신", "시험기간 볶음밥 할인 이벤트!!", 4.8),
         const SizedBox(height: 10),
         _buildEventItem(
             'assets/images/store2.png', "고수찜닭", "3인분 이상 주문시 치즈토핑 무료!", 4.5),

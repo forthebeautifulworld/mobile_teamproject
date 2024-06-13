@@ -197,7 +197,25 @@ class ReservationPageState extends State<ReservationPage> {
                   width: 380, height: 80), // 큰 직사각형 테이블
               buildTable(tableStatuses[1], 120, 20,
                   width: 80, height: 160), // 높은 직사각형 테이블
-              // 이곳에 추가 테이블 빌드를 추가할 수 있습니다.
+              buildTable(tableStatuses[2], 120, 130,
+                  width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[3], 120, 240,
+                  width: 160, height: 80), // Square
+              buildTable(tableStatuses[4], 240, 240,
+                  width: 160, height: 80), // Rectangle
+              buildTable(tableStatuses[5], 300, 20,
+                  width: 80, height: 80), // Rectangle
+              buildTable(tableStatuses[6], 400, 20,
+                  width: 80, height: 160), // Square
+              buildTable(tableStatuses[7], 580, 20,
+                  width: 80, height: 160), // Square
+              buildTable(tableStatuses[8], 480, 200,
+                  width: 80, height: 80), // Square
+              buildTable(tableStatuses[9], 480, 300,
+                  width: 80, height: 80), // Square
+              buildTable(tableStatuses[10], 580, 200, width: 80, height: 80),
+              buildTable(tableStatuses[11], 580, 300,
+                  width: 80, height: 80), // Tall rectangle
               const Positioned(
                 bottom: 20,
                 left: 160,
