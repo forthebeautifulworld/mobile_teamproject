@@ -1,16 +1,18 @@
-//home_page.dart
 import 'package:flutter/material.dart';
 import 'store_search_page.dart';
 import 'store_register_page.dart';
+import 'store_list_page.dart';
+import 'my_info_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final Map<String, dynamic> userInfo; // 사용자 정보를 저장할 Map
+
+  const HomePage({super.key, required this.userInfo});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
-
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +25,18 @@ class _HomePageState extends State<HomePage> {
                   'assets/images/default_profile.jpeg'), // 프로필 이미지 경로
             ),
             const SizedBox(width: 10),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("정다훈"),
-                Text("미식가", style: TextStyle(fontSize: 12)),
+                if (widget.userInfo.isNotEmpty)
+                  Text(widget.userInfo['name']),
+                // 사용자 정보가 없으면 기본 텍스트 출력
+                if (widget.userInfo.isEmpty)
+                  const Text('Guest'),
               ],
             ),
             const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.notifications),
-              onPressed: () {
-                // 아무 기능도 없음
-              },
-            ),
+
           ],
         ),
       ),
@@ -63,14 +63,14 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const StoreSearchPage(),
+                          builder: (context) => StoreSearchPage(),
                         ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,13 +101,14 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const StoreRegisterPage(),
+                          settings: RouteSettings(arguments: widget.userInfo),
                         ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
                       padding:
-                          const EdgeInsets.symmetric(vertical: 30), // 패딩 60
+                      const EdgeInsets.symmetric(vertical: 30), // 패딩 60
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,10 +132,43 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const StoreListPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      padding: const EdgeInsets.symmetric(vertical: 30),
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 60),
+                          child: Text(
+                            "매장 목록",
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 60),
+                          child: Icon(
+                            Icons.list,
+                            color: Colors.white,
+                            size: 80,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-
             // 추가된 부분 종료
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -177,7 +211,10 @@ class _HomePageState extends State<HomePage> {
           if (index == 0) {
             // HomePage로 이동하는 코드가 이미 있음
           } else if (index == 1) {
-            // My Info 페이지로 이동하는 코드를 추가해야 함
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyInfoPage(userInfo: widget.userInfo)),
+            );
           }
         },
       ),
@@ -188,7 +225,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         _buildEventItem(
-            'assets/images/store1.png', "복신", "시험기간 묵음밥 할인 이벤트!!", 4.8),
+            'assets/images/store1.png', "복신", "시험기간 볶음밥 할인 이벤트!!", 4.8),
         const SizedBox(height: 10),
         _buildEventItem(
             'assets/images/store2.png', "고수찜닭", "3인분 이상 주문시 치즈토핑 무료!", 4.5),
@@ -214,7 +251,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 storeName,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(description),
             ],

@@ -1,8 +1,9 @@
+// 앱의 메인 파일
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'login_page.dart'; // 로그인 페이지 import
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp()); // 앱 실행
 }
 
 class MyApp extends StatelessWidget {
@@ -11,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Restaurant Reservation App',
+      title: 'Restaurant Reservation App', // 앱 제목
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.purple, // 앱 테마 색상
       ),
-      home: const InitialPage(),
+      home: const InitialPage(), // 초기 페이지 설정
     );
   }
 }
@@ -29,16 +30,16 @@ class InitialPage extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const LoginPage()),
+          MaterialPageRoute(builder: (context) => const LoginPage()), // 탭하면 로그인 페이지로 이동
         );
       },
       child: Scaffold(
         body: Center(
           child: Image.asset(
-            'assets/images/initial_page_image.jpg', // initial_page�쓽 �씠誘몄�� �뙆�씪 寃쎈줈
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+            'assets/images/initial_page_image.png', // 초기 페이지 이미지 경로
+            fit: BoxFit.cover, // 이미지 채우기 모드
+            width: double.infinity, // 이미지 가로 크기를 화면에 맞춤
+            height: double.infinity, // 이미지 세로 크기를 화면에 맞춤
           ),
         ),
       ),

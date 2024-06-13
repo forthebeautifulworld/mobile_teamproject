@@ -1,3 +1,4 @@
+// login_page.dart
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'signup_page.dart'; // 회원가입 페이지로 이동하도록 import 추가
@@ -14,8 +15,8 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void signIn() async{
-    // 여기에 실제 로그인 로직을 추가하세요 (ex. Firebase Auth)
+  void signIn() async {
+    // 여기에 실제 로그인 로직을 추가하세요 (예: Firebase Auth)
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -23,16 +24,21 @@ class LoginPageState extends State<LoginPage> {
     List<Map<String, dynamic>> users = await DatabaseHelper().getUsers();
 
     // 입력한 email과 password가 데이터베이스에 존재하는지 확인합니다.
-    bool userExists = users.any((user) => user['userId'] == email && user['password'] == password);
+    Map<String, dynamic>? user = users.firstWhere(
+      (user) => user['userId'] == email && user['password'] == password,
+      orElse: () => {}, // 빈 맵 반환
+    );
 
-    if (userExists) {
-      // 로그인 성공 시 my_app3로 이동
+    // 'BuildContext'의 사용 전에 'mounted' 확인을 추가하여 비동기 작업 중 사용을 방지합니다.
+    if (!mounted) return;
+
+    if (user.isNotEmpty) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage(userInfo: user)),
       );
     } else {
-      // 로그인 실패 시 경고 메시지
+      // 사용자 정보가 없을 때 빈 맵 전달
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Invalid email or password")),
       );
@@ -49,7 +55,7 @@ class LoginPageState extends State<LoginPage> {
               height: 250.0,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/fork_background.png'), // 포크 배경 이미지
+                  image: AssetImage('assets/images/fork_background.png'), // 포크 배경 이미지
                   fit: BoxFit.cover,
                 ),
               ),
@@ -62,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
                   const Text(
                     "Login",
                     style:
-                    TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16.0),
                   TextField(
@@ -122,6 +128,7 @@ class LoginPageState extends State<LoginPage> {
                     },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      minimumSize: const Size(double.infinity, 0),
                     ),
                     child: const Text("Sign up"),
                   ),
@@ -134,5 +141,3 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'database_helper.dart';  // Import the database helper class
-import 'users_page.dart';  // Import the users page class
+import 'database_helper.dart';
+import 'users_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -12,10 +12,10 @@ class SignupPage extends StatefulWidget {
 
 class SignupPageState extends State<SignupPage> {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController birthController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   String profileImage = 'assets/default_profile.jpg';
+  DateTime? selectedDate;
 
   void updateProfileImage() {
     setState(() {
@@ -25,7 +25,9 @@ class SignupPageState extends State<SignupPage> {
 
   void signUp() async {
     String name = nameController.text;
-    String birth = birthController.text;
+    String birth = selectedDate != null
+        ? "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}"
+        : '';
     String userId = idController.text;
     String password = passwordController.text;
 
@@ -34,7 +36,11 @@ class SignupPageState extends State<SignupPage> {
       return;
     }
 
-    // Prepare the user data
+    if (!userId.contains('@')) {
+      _showErrorDialog('Please enter a valid email address');
+      return;
+    }
+
     Map<String, dynamic> user = {
       'name': name,
       'birth': birth,
@@ -43,15 +49,14 @@ class SignupPageState extends State<SignupPage> {
     };
 
     try {
-      // Insert the user data into the database
       await DatabaseHelper().insertUser(user);
-
-      // Navigate to the login page or show success message
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     } catch (e) {
+      if (!mounted) return;
       _showErrorDialog('Failed to sign up. Please try again.');
     }
   }
@@ -101,13 +106,51 @@ class SignupPageState extends State<SignupPage> {
               controller: nameController,
               decoration: const InputDecoration(labelText: 'Name'),
             ),
-            TextField(
-              controller: birthController,
-              decoration: const InputDecoration(labelText: 'Birth Date'),
+            const SizedBox(height: 16.0), // 간격 추가
+            InkWell(
+              onTap: () async {
+                final selectedTemp = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                );
+                if (selectedTemp != null) {
+                  setState(() {
+                    selectedDate = selectedTemp;
+                  });
+                }
+              },
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  labelText: 'Birth Date',
+                  border: OutlineInputBorder(),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      selectedDate != null
+                          ? "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}"
+                          : 'Select Date',
+                      style: TextStyle(
+                        color: selectedDate != null
+                            ? Colors.black
+                            : Colors.grey[400],
+                      ),
+                    ),
+                    Icon(
+                      Icons.calendar_today,
+                      color: Colors.grey[400],
+                    ),
+                  ],
+                ),
+              ),
             ),
+            const SizedBox(height: 16.0), // 간격 추가
             TextField(
               controller: idController,
-              decoration: const InputDecoration(labelText: 'User ID'),
+              decoration: const InputDecoration(labelText: 'User Email'),
             ),
             TextField(
               controller: passwordController,
